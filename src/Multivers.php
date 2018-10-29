@@ -25,8 +25,8 @@ class Multivers
     public function connection($connection)
     {
         // Check if connection exists in config.
-        if (! config('multivers.connections.' . $connection)) {
-            throw new \Exception('Connection "' . $connection . '" does not exists in config file.');
+        if (! config('multivers.connections.'.$connection)) {
+            throw new \Exception('Connection "'.$connection.'" does not exists in config file.');
         }
 
         // Set connection.
@@ -42,7 +42,7 @@ class Multivers
 
         // Check if database exists in config.
         if (! $this->connectionConfig('database')) {
-            throw new \Exception('Connection "' . $connection . '" does not exists in config file.');
+            throw new \Exception('Connection "'.$connection.'" does not exists in config file.');
         }
 
         // Set database.
@@ -120,7 +120,7 @@ class Multivers
         // Make request.
         $res = (new Client)->request($method, $this->apiUrl.'/api/'.$this->database.'/'.$action, [
             'headers' => [
-                'Authorization' => 'Bearer ' . $this->accessToken,
+                'Authorization' => 'Bearer '.$this->accessToken,
                 'Accept' => 'application/json',
             ],
             ($method == 'GET' ? 'query' : 'form_params') => $parameters,

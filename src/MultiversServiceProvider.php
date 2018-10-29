@@ -62,6 +62,5 @@ class MultiversServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/multivers.php' => config_path('multivers.php'),
         ], 'laravel-multivers');
-
     }
 }
