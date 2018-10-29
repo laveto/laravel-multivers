@@ -1,7 +1,7 @@
 {
     "name": "laveto/laravel-multivers",
     "description": "Connect to Multivers API",
-    "license": "license",
+    "license": "MIT",
     "authors": [
         {
             "name": "Laveto",
