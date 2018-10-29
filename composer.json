@@ -1,0 +1,43 @@
+{
+    "name": "laveto/laravel-multivers",
+    "description": "Connect to Multivers API",
+    "license": "license",
+    "authors": [
+        {
+            "name": "Laveto",
+            "email": "info@laveto.nl",
+            "homepage": "https://www.laveto.nl"
+        }
+    ],
+    "homepage": "https://github.com/laveto/laravelmultivers",
+    "keywords": ["Laravel", "LaravelMultivers", "Multivers", "connector"],
+    "require": {
+        "illuminate/support": "~5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.0",
+        "mockery/mockery": "^1.1",
+        "orchestra/testbench": "~3.0",
+        "sempro/phpunit-pretty-print": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laveto\\LaravelMultivers\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Laveto\\LaravelMultivers\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Laveto\\LaravelMultivers\\MultiversServiceProvider"
+            ],
+            "aliases": {
+                "LaravelMultivers": "Laveto\\LaravelMultivers\\Facades\\Multivers"
+            }
+        }
+    }
+}
