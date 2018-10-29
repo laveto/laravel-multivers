@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `LaravelMultivers` will be documented in this file.
+All notable changes to `Laravel-Multivers` will be documented in this file.
 
 ## Version 1.0
 
