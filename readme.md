@@ -46,12 +46,10 @@ license. Please see the [license file](license.md) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/laveto/laravelmultivers.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/laveto/laravelmultivers.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/laveto/laravelmultivers/master.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/12345678/shield
+[ico-styleci]: https://github.styleci.io/repos/155196029/shield
 
-[link-packagist]: https://packagist.org/packages/laveto/laravelmultivers
-[link-downloads]: https://packagist.org/packages/laveto/laravelmultivers
-[link-travis]: https://travis-ci.org/laveto/laravelmultivers
-[link-styleci]: https://styleci.io/repos/12345678
+[link-packagist]: https://packagist.org/packages/laveto/laravel-multivers
+[link-downloads]: https://packagist.org/packages/laveto/laravel-multivers
+[link-styleci]: https://github.styleci.io/repos/155196029
 [link-author]: https://github.com/laveto
 [link-contributors]: ../../contributors]

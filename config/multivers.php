@@ -13,7 +13,7 @@ return [
             'client_id' => '',
             'client_secret' => '',
             'grant_type' => 'refresh_token',
-            'database' => 'MVL00001'
+            'database' => 'MVL00001',
 
         ],
 

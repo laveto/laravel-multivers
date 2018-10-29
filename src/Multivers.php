@@ -19,28 +19,31 @@ class Multivers
 
     protected function connectionConfig($key)
     {
-        return config('multivers.connections.' . $this->connection . '.' . $key);
+        return config('multivers.connections.'.$this->connection.'.'.$key);
     }
 
     public function connection($connection)
     {
         // Check if connection exists in config.
-        if(!config('multivers.connections.' . $connection))
+        if (! config('multivers.connections.' . $connection)) {
             throw new \Exception('Connection "' . $connection . '" does not exists in config file.');
+        }
 
         // Set connection.
         $this->connection = $connection;
 
-        // Check if connection exists in config.
-        if(!filter_var($this->connectionConfig('api_url'), FILTER_VALIDATE_URL))
+        // Check if url is valid in config.
+        if (! filter_var($this->connectionConfig('api_url'), FILTER_VALIDATE_URL)) {
             throw new \Exception('Invalid api_url given in config file.');
+        }
 
         // Set API url.
         $this->apiUrl = $this->connectionConfig('api_url');
 
         // Check if database exists in config.
-        if(!$this->connectionConfig('database'))
+        if (! $this->connectionConfig('database')) {
             throw new \Exception('Connection "' . $connection . '" does not exists in config file.');
+        }
 
         // Set database.
         $this->database = $this->connectionConfig('database');
@@ -51,8 +54,7 @@ class Multivers
     protected function initAccessToken()
     {
         // Return from cache?
-        if(Cache::has('LaravelMultivers.accessToken'))
-        {
+        if (Cache::has('LaravelMultivers.accessToken')) {
             // Set access token from cache.
             $this->accessToken = Cache::get('LaravelMultivers.accessToken');
 
@@ -61,21 +63,22 @@ class Multivers
         }
 
         // Request new access token.
-        $res = (new Client)->request('POST', $this->connectionConfig('api_url') . '/OAuth/Token', [
+        $res = (new Client)->request('POST', $this->connectionConfig('api_url').'/OAuth/Token', [
             'form_params' => [
                 'refresh_token' => $this->connectionConfig('refresh_token'),
                 'client_id' => $this->connectionConfig('client_id'),
                 'client_secret' => $this->connectionConfig('client_secret'),
-                'grant_type' => $this->connectionConfig('grant_type')
-            ]
+                'grant_type' => $this->connectionConfig('grant_type'),
+            ],
         ]);
 
         // JSON decode.
         $result = json_decode($res->getBody()->getContents(), true);
 
         // Error due to no access_token received?
-        if(!@$result['access_token'])
+        if (! @$result['access_token']) {
             throw new Exception('No access token received!');
+        }
 
         // Save access token to cache.
         Cache::put('LaravelMultivers.accessToken', $result['access_token'], $result['expires_in'] / 60 - 5);
@@ -110,14 +113,15 @@ class Multivers
     protected function request($method, $action, $parameters = [])
     {
         // Get access token.
-        if(!$this->accessToken)
+        if (! $this->accessToken) {
             $this->initAccessToken();
+        }
 
         // Make request.
-        $res = (new Client)->request($method, $this->apiUrl . '/api/' . $this->database . '/' . $action, [
+        $res = (new Client)->request($method, $this->apiUrl.'/api/'.$this->database.'/'.$action, [
             'headers' => [
                 'Authorization' => 'Bearer ' . $this->accessToken,
-                'Accept' => 'application/json'
+                'Accept' => 'application/json',
             ],
             ($method == 'GET' ? 'query' : 'form_params') => $parameters,
         ]);
