@@ -43,19 +43,19 @@ use Laveto\LaravelMultivers\Facades\Multivers;
 
 To make a get call use:
 ```
-Multivers::get('CustomerInfoList');
+$result = Multivers::get('CustomerInfoList');
 ```
 
 Optionally you can pass extra data that will be added in the request query string. Of course you can also use the OData parameters here. See below example.
 
 ```
-Multivers::get('CustomerInfoList', ['$top' => 3]);
+$result = Multivers::get('CustomerInfoList', ['$top' => 3]);
 ```
 
 To make post request you need to use `Multivers::post()`.
 
 ```
-Multivers::post('Customer', [
+$result = Multivers::post('Customer', [
     "accountManagerId": "sample string 1",
     "addresses": null,
     "messages": [],
