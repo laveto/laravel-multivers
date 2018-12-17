@@ -105,7 +105,7 @@ class Multivers
         return $this->request('PUT', $action, $parameters);
     }
 
-    public function delete($action, $parameters)
+    public function delete($action, $parameters = [])
     {
         return $this->request('DELETE', $action, $parameters);
     }
@@ -117,14 +117,21 @@ class Multivers
             $this->initAccessToken();
         }
 
+        try {
+
         // Make request.
         $res = (new Client)->request($method, $this->apiUrl.'/api/'.$this->database.'/'.$action, [
             'headers' => [
                 'Authorization' => 'Bearer '.$this->accessToken,
                 'Accept' => 'application/json',
             ],
-            ($method == 'GET' ? 'query' : 'form_params') => $parameters,
+            'query' => ($method == 'GET' ? $parameters : []),
+            'json' =>  ($method != 'GET' ? $parameters : null)
         ]);
+
+    } catch(\GuzzleHttp\Exception\ClientException $e) {
+dd($e->getResponse()->getBody()->getContents());
+}
 
         // JSON decode.
         $result = json_decode($res->getBody()->getContents(), true);
