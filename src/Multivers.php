@@ -120,18 +120,17 @@ class Multivers
         try {
 
         // Make request.
-        $res = (new Client)->request($method, $this->apiUrl.'/api/'.$this->database.'/'.$action, [
+            $res = (new Client)->request($method, $this->apiUrl.'/api/'.$this->database.'/'.$action, [
             'headers' => [
                 'Authorization' => 'Bearer '.$this->accessToken,
                 'Accept' => 'application/json',
             ],
             'query' => ($method == 'GET' ? $parameters : []),
-            'json' =>  ($method != 'GET' ? $parameters : null)
+            'json' =>  ($method != 'GET' ? $parameters : null),
         ]);
-
-    } catch(\GuzzleHttp\Exception\ClientException $e) {
-dd($e->getResponse()->getBody()->getContents());
-}
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            dd($e->getResponse()->getBody()->getContents());
+        }
 
         // JSON decode.
         $result = json_decode($res->getBody()->getContents(), true);
