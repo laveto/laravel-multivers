@@ -129,7 +129,7 @@ class Multivers
             'json' =>  ($method != 'GET' ? $parameters : null),
         ]);
         } catch (\GuzzleHttp\Exception\ClientException $e) {
-            dd($e->getResponse()->getBody()->getContents());
+            dd(json_decode($e->getResponse()->getBody()->getContents()));
         }
 
         // JSON decode.
